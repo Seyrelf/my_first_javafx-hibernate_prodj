@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="main_window" depthTest="ENABLE" maxHeight="860.0" maxWidth="1320.0" minHeight="860.0" minWidth="1320.0" prefHeight="0.0" prefWidth="0.0" styleClass="anchor" stylesheets="@style/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="invest_prodj.InvestmentWindowController">
+   <children>
+      <ButtonBar fx:id="button_menu" buttonMinWidth="100.0" layoutX="-39.0" layoutY="9.0" maxHeight="198.0" maxWidth="1320.0" minHeight="60.0" minWidth="0.0" prefHeight="60.0" prefWidth="707.0" AnchorPane.leftAnchor="-39.0" AnchorPane.rightAnchor="652.0" AnchorPane.topAnchor="9.0">
+        <buttons>
+            <Button fx:id="main_window_btn" alignment="CENTER" cache="true" cacheHint="SPEED" contentDisplay="CENTER" maxHeight="50.0" maxWidth="205.0" minHeight="50.0" mnemonicParsing="false" onAction="#change_window_to_main" opacity="0.95" prefHeight="50.0" prefWidth="703.0" style="-fx-background-color: #ADD8E6;" styleClass="btn" text="Главное меню" textAlignment="CENTER" textFill="#171717" textOverrun="CLIP" wrapText="true">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="44.45" radius="15.8625">
+                     <color>
+                        <Color red="0.17105263471603394" green="0.10233917832374573" blue="0.7894737124443054" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+               <opaqueInsets>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </opaqueInsets>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="person_window_btn" alignment="CENTER" cache="true" cacheHint="SPEED" contentDisplay="CENTER" maxHeight="50.0" maxWidth="260.0" minHeight="50.0" mnemonicParsing="false" onAction="#change_window_to_person" opacity="0.95" prefHeight="50.0" prefWidth="703.0" style="-fx-background-color: #ADD8E6;" styleClass="btn" text="Редактировать обьекты" textAlignment="CENTER" textFill="#171717" textOverrun="CLIP" wrapText="true">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="44.45" radius="15.8625">
+                     <color>
+                        <Color red="0.17105263471603394" green="0.10233917832374573" blue="0.7894737124443054" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+               <opaqueInsets>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </opaqueInsets>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="exit_btn" alignment="CENTER" cache="true" cacheHint="SPEED" contentDisplay="CENTER" maxHeight="50.0" maxWidth="151.0" minHeight="50.0" mnemonicParsing="false" onAction="#close_program" opacity="0.95" prefHeight="50.0" style="-fx-background-color: #ADD8E6;" styleClass="btn" text="Выход" textAlignment="CENTER" textFill="#171717" textOverrun="CLIP" wrapText="true">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="44.45" radius="15.8625">
+                     <color>
+                        <Color red="0.17105263471603394" green="0.10233917832374573" blue="0.7894737124443054" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+               <opaqueInsets>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </opaqueInsets>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+        </buttons>
+      </ButtonBar>
+      <TableView fx:id="investment_table" editable="true" layoutX="10.0" layoutY="84.0" onMouseClicked="#take_investment_from_table" opacity="0.95" prefHeight="624.0" prefWidth="1300.0" style="-fx-background-color: #ADD8E6;" styleClass="tableview" stylesheets="@style/main.css" AnchorPane.leftAnchor="10.0">
+        <columns>
+          <TableColumn fx:id="investment_table_name" prefWidth="124.0" text="Название" />
+          <TableColumn fx:id="investment_table_amount" prefWidth="122.0" text="Сумма" />
+            <TableColumn fx:id="investment_table_date" prefWidth="122.0" text="Дата" />
+            <TableColumn fx:id="investment_table_percent" prefWidth="122.0" text="Процент" />
+            <TableColumn fx:id="investment_table_note" prefWidth="560.0" text="Примечание" />
+            <TableColumn fx:id="investment_table_person_name" prefWidth="122.0" text="Место нахождения" />
+            <TableColumn fx:id="investment_table_id" maxWidth="10.0" prefWidth="10.0" text="id" visible="false" />
+            <TableColumn fx:id="investment_table_person_id" maxWidth="10.0" prefWidth="10.0" text="id" visible="false" />
+        </columns>
+         <effect>
+            <InnerShadow choke="0.24" height="31.875" radius="7.46875" width="0.0">
+               <color>
+                  <Color green="0.15714286267757416" blue="1.0" opacity="0.6899999976158142" />
+               </color>
+            </InnerShadow>
+         </effect>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <Label fx:id="time_label" alignment="CENTER" contentDisplay="CENTER" layoutX="1089.0" layoutY="2.0" opacity="0.81" prefHeight="75.0" prefWidth="217.0" style="-fx-background-color: #ADD8E6;">
+         <font>
+            <Font name="Verdana Bold" size="23.0" />
+         </font>
+         <effect>
+            <InnerShadow choke="0.56" height="97.57" radius="49.66" width="103.07" />
+         </effect>
+      </Label>
+      <ImageView fx:id="img_person" fitHeight="378.0" fitWidth="550.0" layoutX="660.0" layoutY="-301.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@style/img/fight.gif" />
+         </image>
+      </ImageView>
+      <Button fx:id="investment_delete_btn" alignment="CENTER" cache="true" cacheHint="SPEED" contentDisplay="CENTER" layoutX="1118.0" layoutY="809.0" maxHeight="38.0" maxWidth="160.0" minHeight="38.0" minWidth="160.0" mnemonicParsing="false" onAction="#delete_investment" opacity="0.95" prefHeight="30.0" prefWidth="703.0" style="-fx-background-color: #DC143C;" styleClass="btn" text="Удалить" textAlignment="CENTER" textFill="#171717" textOverrun="CLIP" wrapText="true">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font>
+         <effect>
+            <InnerShadow height="44.45" radius="15.8625">
+               <color>
+                  <Color red="0.17105263471603394" green="0.10233917832374573" blue="0.7894737124443054" />
+               </color>
+            </InnerShadow>
+         </effect>
+         <opaqueInsets>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </opaqueInsets>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="investment_create_btn" alignment="CENTER" cache="true" cacheHint="SPEED" contentDisplay="CENTER" layoutX="1118.0" layoutY="729.0" maxHeight="38.0" maxWidth="160.0" minHeight="38.0" minWidth="160.0" mnemonicParsing="false" onAction="#create_investment" opacity="0.95" prefHeight="30.0" prefWidth="703.0" style="-fx-background-color: #228B22;" styleClass="btn" text="Создать" textAlignment="CENTER" textFill="#171717" textOverrun="CLIP" wrapText="true">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font>
+         <effect>
+            <InnerShadow height="44.45" radius="15.8625">
+               <color>
+                  <Color red="0.17105263471603394" green="0.10233917832374573" blue="0.7894737124443054" />
+               </color>
+            </InnerShadow>
+         </effect>
+         <opaqueInsets>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </opaqueInsets>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <FlowPane alignment="CENTER" hgap="2.0" layoutX="36.0" layoutY="707.0" prefHeight="162.0" prefWidth="1053.0" vgap="15.0">
+         <children>
+            <Label fx:id="investment_label_name" alignment="CENTER" contentDisplay="CENTER" maxHeight="55.0" maxWidth="150.0" minHeight="55.0" minWidth="150.0" prefHeight="55.0" prefWidth="143.0" style="-fx-background-color: #ADD8E6;" text="Название" textAlignment="RIGHT">
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+               <effect>
+                  <InnerShadow choke="0.4" height="18.07" radius="9.2675">
+                     <color>
+                        <Color red="0.13858430087566376" green="0.46052631735801697" blue="0.35857802629470825" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Label>
+            <TextField fx:id="investment_textfield_name" maxHeight="55.0" maxWidth="170.0" minHeight="55.0" minWidth="170.0" opacity="0.9" prefHeight="55.0" prefWidth="198.0" style="-fx-background-color: #ADD8E6;">
+               <effect>
+                  <InnerShadow choke="0.28" height="26.87" radius="12.2" width="23.93">
+                     <color>
+                        <Color red="0.08817921578884125" green="0.04355506971478462" blue="0.17105263471603394" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+            </TextField>
+            <Label fx:id="investment_label_amount" alignment="CENTER" contentDisplay="CENTER" maxHeight="55.0" maxWidth="150.0" minHeight="55.0" minWidth="150.0" prefHeight="55.0" prefWidth="145.0" style="-fx-background-color: #ADD8E6;" text="Сумма" textAlignment="RIGHT">
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+               <effect>
+                  <InnerShadow choke="0.4" height="18.07" radius="9.2675">
+                     <color>
+                        <Color red="0.13858430087566376" green="0.46052631735801697" blue="0.35857802629470825" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Label>
+            <TextField fx:id="investment_textfield_amount" maxHeight="55.0" maxWidth="170.0" minHeight="55.0" minWidth="170.0" opacity="0.9" prefHeight="55.0" prefWidth="191.0" style="-fx-background-color: #ADD8E6;">
+               <effect>
+                  <InnerShadow choke="0.28" height="26.87" radius="12.2" width="23.93">
+                     <color>
+                        <Color red="0.08817921578884125" green="0.04355506971478462" blue="0.17105263471603394" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+            </TextField>
+            <Label fx:id="investment_label_person" alignment="CENTER" contentDisplay="CENTER" maxHeight="55.0" maxWidth="171.0" minHeight="55.0" minWidth="150.0" prefHeight="55.0" prefWidth="171.0" style="-fx-background-color: #ADD8E6;" text="Место нахождения" textAlignment="RIGHT">
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+               <effect>
+                  <InnerShadow choke="0.4" height="18.07" radius="9.2675">
+                     <color>
+                        <Color red="0.13858430087566376" green="0.46052631735801697" blue="0.35857802629470825" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Label>
+            <ComboBox fx:id="investment_combobox_name" maxHeight="55.0" maxWidth="213.0" minHeight="55.0" minWidth="132.0" opacity="0.9" prefHeight="55.0" prefWidth="213.0" style="-fx-background-color: #ADD8E6;">
+               <effect>
+                  <InnerShadow choke="0.28" height="24.25" radius="11.5625" width="24.0">
+                     <color>
+                        <Color red="0.08627451211214066" green="0.04313725605607033" blue="0.1725490242242813" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </ComboBox>
+            <Label fx:id="investment_label_date" alignment="CENTER" contentDisplay="CENTER" maxHeight="55.0" maxWidth="150.0" minHeight="55.0" minWidth="150.0" prefHeight="55.0" prefWidth="121.0" style="-fx-background-color: #ADD8E6;" text="Дата" textAlignment="RIGHT">
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+               <effect>
+                  <InnerShadow choke="0.4" height="18.07" radius="9.2675">
+                     <color>
+                        <Color red="0.13858430087566376" green="0.46052631735801697" blue="0.35857802629470825" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Label>
+            <DatePicker fx:id="investment_datepicker_name" maxHeight="55.0" maxWidth="170.0" minHeight="55.0" minWidth="170.0" opacity="0.9" prefHeight="56.0" prefWidth="174.0" style="-fx-background-color: #ADD8E6;">
+               <effect>
+                  <InnerShadow choke="0.28" height="24.25" radius="11.5625" width="24.0">
+                     <color>
+                        <Color red="0.08627451211214066" green="0.04313725605607033" blue="0.1725490242242813" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </DatePicker>
+            <Label fx:id="investment_label_percent" alignment="CENTER" contentDisplay="CENTER" maxHeight="55.0" maxWidth="150.0" minHeight="55.0" minWidth="150.0" prefHeight="55.0" prefWidth="152.0" style="-fx-background-color: #ADD8E6;" text="Процент" textAlignment="RIGHT">
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+               <effect>
+                  <InnerShadow choke="0.4" height="18.07" radius="9.2675">
+                     <color>
+                        <Color red="0.13858430087566376" green="0.46052631735801697" blue="0.35857802629470825" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Label>
+            <TextField fx:id="investment_textfield_percent" maxHeight="55.0" maxWidth="170.0" minHeight="55.0" minWidth="170.0" opacity="0.9" prefHeight="55.0" prefWidth="236.0" style="-fx-background-color: #ADD8E6;">
+               <effect>
+                  <InnerShadow choke="0.28" height="24.67" radius="11.65" width="23.93">
+                     <color>
+                        <Color red="0.08627451211214066" green="0.04313725605607033" blue="0.1725490242242813" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+            </TextField>
+            <Label fx:id="investment_label_note" alignment="CENTER" contentDisplay="CENTER" maxHeight="55.0" maxWidth="150.0" minHeight="55.0" minWidth="150.0" prefHeight="55.0" prefWidth="143.0" style="-fx-background-color: #ADD8E6;" text="Примечание" textAlignment="RIGHT">
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+               <effect>
+                  <InnerShadow choke="0.4" height="18.07" radius="9.2675">
+                     <color>
+                        <Color red="0.13858430087566376" green="0.46052631735801697" blue="0.35857802629470825" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Label>
+            <TextField fx:id="investment_textfield_note" maxHeight="55.0" maxWidth="231.0" minHeight="55.0" minWidth="150.0" opacity="0.9" prefHeight="55.0" prefWidth="231.0" style="-fx-background-color: #ADD8E6;">
+               <effect>
+                  <InnerShadow choke="0.28" height="24.67" radius="11.65" width="23.93">
+                     <color>
+                        <Color red="0.08627451211214066" green="0.04313725605607033" blue="0.1725490242242813" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+            </TextField>
+         </children>
+      </FlowPane>
+      <Button fx:id="investment_change_btn" alignment="CENTER" cache="true" cacheHint="SPEED" contentDisplay="CENTER" layoutX="1118.0" layoutY="769.0" maxHeight="38.0" maxWidth="160.0" minHeight="38.0" minWidth="160.0" mnemonicParsing="false" onAction="#change_investment" opacity="0.95" prefHeight="30.0" prefWidth="703.0" style="-fx-background-color: #66CDAA;" styleClass="btn" text="Изменить" textAlignment="CENTER" textFill="#171717" textOverrun="CLIP" wrapText="true">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font>
+         <effect>
+            <InnerShadow height="44.45" radius="15.8625">
+               <color>
+                  <Color red="0.17105263471603394" green="0.10233917832374573" blue="0.7894737124443054" />
+               </color>
+            </InnerShadow>
+         </effect>
+         <opaqueInsets>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </opaqueInsets>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+   <effect>
+      <InnerShadow blurType="ONE_PASS_BOX" choke="0.39" height="30.0" radius="14.5" width="30.0">
+         <color>
+            <Color red="0.11056286841630936" green="0.2740618884563446" blue="0.7236841917037964" opacity="0.7900000214576721" />
+         </color>
+      </InnerShadow>
+   </effect>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
+</AnchorPane>
