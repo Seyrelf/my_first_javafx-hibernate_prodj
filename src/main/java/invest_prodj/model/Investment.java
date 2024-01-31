@@ -1,7 +1,6 @@
 package invest_prodj.model;
 
 import lombok.Data;
-
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -14,8 +13,6 @@ public class Investment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-
     private String name;
     private String note;
     private BigDecimal amount;

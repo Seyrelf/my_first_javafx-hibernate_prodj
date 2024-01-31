@@ -1,9 +1,8 @@
 package invest_prodj.repository;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import invest_prodj.model.Investment;
 import invest_prodj.model.Person;
-
 import java.util.List;
 
 public class PersonDao {
@@ -34,12 +33,8 @@ public class PersonDao {
         Transaction tx1 = session.beginTransaction();
         session.remove(person);
         tx1.commit();
-        session.close();  //закрываем сессию
+        session.close();
     }
-
-    /*public void delete(Person person){
-        Session session = HibernateSession.getSessionFactory().openSession().createQuery("Delete from Person where id = " + person.getId()).;
-    }*/
 
     public List<Person> findAll(){
         List<Person> persons = (List<Person>) HibernateSession.getSessionFactory().openSession().createQuery("From Person").list();

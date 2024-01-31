@@ -16,11 +16,8 @@ public class Person {
     private String name;
     private String note;
     private String phone_number;
-
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Investment> investments;
-
-
 
     public Person(String name, String note,String phone_number){
         this.name = name;
@@ -28,7 +25,6 @@ public class Person {
         this.note = note;
         investments = new ArrayList<Investment>();
     }
-
     public Person(String name,int id){
         this.name = name;
         this.id = id;

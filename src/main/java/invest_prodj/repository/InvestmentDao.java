@@ -1,16 +1,13 @@
 package invest_prodj.repository;
 
 import invest_prodj.model.Investment;
-import invest_prodj.model.Person;
-import jakarta.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.List;
 
 public class InvestmentDao {
+
     public Investment findById(int id){
         return HibernateSession.getSessionFactory().openSession().get(Investment.class,id);
     }
@@ -39,6 +36,7 @@ public class InvestmentDao {
         tx1.commit();
         session.close();
     }
+
     public List<BigDecimal> amount_sum(){
         Session session = HibernateSession.getSessionFactory().openSession();
         String hql = "Select sum(amount) from Investment";
@@ -55,9 +53,9 @@ public class InvestmentDao {
         List<Investment> investments = (List<Investment>) HibernateSession.getSessionFactory().openSession().createQuery("From Investment where person_id =" + id_p).list();
         return investments;
     }
+
     public List<Investment> findAll(){
         List<Investment> investments = (List<Investment>) HibernateSession.getSessionFactory().openSession().createQuery("From Investment").list();
         return investments;
     }
-
-    }
+}

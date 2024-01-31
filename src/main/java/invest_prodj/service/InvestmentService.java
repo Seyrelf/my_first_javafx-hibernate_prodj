@@ -1,11 +1,7 @@
 package invest_prodj.service;
 
 import invest_prodj.model.Investment;
-import invest_prodj.model.Person;
 import invest_prodj.repository.InvestmentDao;
-import invest_prodj.repository.PersonDao;
-
-import java.math.BigDecimal;
 import java.util.List;
 
 public class InvestmentService {

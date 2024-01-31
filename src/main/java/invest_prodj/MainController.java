@@ -21,14 +21,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -39,6 +35,14 @@ public class MainController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
+
+    public ObservableList<Person> list_for_person;
+
+    public ObservableList<Investment> list_for_investment;
+
+    public PersonService personService;
+
+    public InvestmentService investmentService;
 
     //Таблицы
     @FXML
@@ -64,9 +68,6 @@ public class MainController implements Initializable {
     @FXML
     public TableColumn<Person,Integer> person_table_id;
 
-
-    //Гифки и изображения
-
     //Текста
     @FXML
     public Label time_label;
@@ -86,17 +87,6 @@ public class MainController implements Initializable {
     public Button show_all_investment_btn;
     @FXML
     public Button exit_btn;
-
-    //@FXML
-    //public MediaView media;
-
-    public ObservableList<Person> list_for_person;
-
-    public ObservableList<Investment> list_for_investment;
-
-    public PersonService personService;
-
-    public InvestmentService investmentService;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
@@ -126,7 +116,6 @@ public class MainController implements Initializable {
         Parent root = FXMLLoader.load(PersonWindowController.class.getResource("person_window.fxml"));
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        //stage.getIcons().add(new Image(getClass().getResourceAsStream("economy.png")));
         stage.setTitle("Редактор обьектов");
         stage.setScene(scene);
         stage.show();
@@ -136,7 +125,6 @@ public class MainController implements Initializable {
         Parent root = FXMLLoader.load(InvestmentWindowController.class.getResource("investment_window.fxml"));
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        //stage.getIcons().add(new Image(getClass().getResourceAsStream("economy.png")));
         stage.setTitle("Редактор вложений");
         stage.setScene(scene);
         stage.show();
@@ -146,7 +134,6 @@ public class MainController implements Initializable {
         Parent root = FXMLLoader.load(MainController.class.getResource("main_back.fxml"));
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        //stage.getIcons().add(new Image(getClass().getResourceAsStream("economy.png")));
         stage.setTitle("Главное меню");
         stage.setScene(scene);
         stage.show();
@@ -164,6 +151,20 @@ public class MainController implements Initializable {
         }
     }
 
+    public void close_program(ActionEvent e){
+        System.exit(0);
+    }
+
+    public void show_investment_by_id_mouse_click(MouseEvent e){
+        try {
+            Person person = person_table.getSelectionModel().getSelectedItem();
+            investment_table.setItems(find_investment_by_idp(person.getId()));
+            amount_by_person_label.setText("Сумма по обьекту: "+ investmentService.amount_by_person(person.getId()));}
+        catch (Exception exception){
+            System.out.println("Выберите обьект");
+        }
+    }
+
     public void show_all_investment(){
         try{
         list_for_investment = FXCollections.observableArrayList();
@@ -176,17 +177,6 @@ public class MainController implements Initializable {
         }
     }
 
-
-    public void show_investment_by_id_mouse_click(MouseEvent e){
-        try {
-        Person person = person_table.getSelectionModel().getSelectedItem();
-        investment_table.setItems(find_investment_by_idp(person.getId()));
-        amount_by_person_label.setText("Сумма по обьекту: "+ investmentService.amount_by_person(person.getId()));}
-        catch (Exception exception){
-            System.out.println("Выберите обьект");
-        }
-    }
-
     public ObservableList<Investment> find_investment_by_idp(int id){
         list_for_investment = FXCollections.observableArrayList();
         for(Investment i:investmentService.findInvestmentByIdP(id)){
@@ -195,7 +185,6 @@ public class MainController implements Initializable {
 
         return list_for_investment;
     }
-
 
     public void show_all_person(){
         try{
@@ -218,9 +207,6 @@ public class MainController implements Initializable {
         }
     }
 
-    public void close_program(ActionEvent e){
-        System.exit(0);
-    }
     private void Timenow(){
         Thread thread = new Thread(() ->{
             SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
@@ -232,20 +218,5 @@ public class MainController implements Initializable {
                 Platform.runLater(()->{time_label.setText(sdf.format(new Date()));});}});
         thread.start();
     }
-
-
-    /*public void onPlayAudio(MouseEvent event){
-        if(media.getMediaPlayer() == null){
-            try{
-                String file = getClass().getResource("chidori_sound.mp3").toURI().toString();
-                Media medias = new Media(file);
-                MediaPlayer player = new MediaPlayer(medias);
-                media.setMediaPlayer(player);
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
-            }
-        }
-        media.getMediaPlayer().play();
-    }*/
 
 }

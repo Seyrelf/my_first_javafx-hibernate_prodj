@@ -16,7 +16,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -42,10 +41,9 @@ public class InvestmentWindowController implements Initializable {
     public ObservableList<Person> list_for_person;
 
 
+    //Колонки и таблицы
     @FXML
     public TableView<Investment> investment_table;
-
-    //Колонки таблицы
     @FXML
     public TableColumn<Investment, BigDecimal> investment_table_amount;
     @FXML
@@ -63,6 +61,7 @@ public class InvestmentWindowController implements Initializable {
     @FXML
     public TableColumn<Investment,Integer> investment_table_person_id;
 
+    //Текстовые обьекты
     @FXML
     public Label time_label;
     @FXML
@@ -91,16 +90,19 @@ public class InvestmentWindowController implements Initializable {
 
         investmentService = new InvestmentService();
         personService = new PersonService();
+
         investment_table_amount.setCellValueFactory(new PropertyValueFactory<Investment,BigDecimal>("amount"));
         investment_table_date.setCellValueFactory(new PropertyValueFactory<Investment,String>("data"));
         investment_table_name.setCellValueFactory(new PropertyValueFactory<Investment,String >("name"));
         investment_table_note.setCellValueFactory(new PropertyValueFactory<Investment,String>("note"));
         investment_table_percent.setCellValueFactory(new PropertyValueFactory<Investment,Double>("percent"));
         investment_table_person_id.setCellValueFactory(new PropertyValueFactory<Investment,Integer>("person_id"));
+
         show_all_investment();
         show_all_person();
         Timenow();
     }
+
     public void change_window_to_person(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(PersonWindowController.class.getResource("person_window.fxml"));
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
@@ -119,7 +121,7 @@ public class InvestmentWindowController implements Initializable {
         stage.show();
     }
 
-    public void create_investment(ActionEvent e) throws  IOException{
+    public void create_investment(ActionEvent e){
         Investment investment = new Investment(investment_textfield_name.getText(),investment_textfield_note.getText(),
                 new BigDecimal(investment_textfield_amount.getText()),new Double(investment_textfield_percent.getText()),
                 investment_combobox_name.getValue().getId(),java.sql.Date.valueOf((investment_datepicker_name.getValue())));
@@ -148,6 +150,16 @@ public class InvestmentWindowController implements Initializable {
         System.exit(0);
     }
 
+    public void take_investment_from_table(MouseEvent event){
+        Investment investment = investment_table.getSelectionModel().getSelectedItem();
+        investment_textfield_name.setText(investment.getName());
+        investment_textfield_note.setText(investment.getNote());
+        investment_textfield_percent.setText(Double.toString(investment.getPercent()));
+        investment_textfield_amount.setText(investment.getAmount().toString());
+        investment_combobox_name.setValue(personService.findPerson(investment.getPerson_id()));
+        investment_datepicker_name.setValue(investment.getData().toLocalDate());
+    }
+
     public void show_all_investment(){
         try{
             list_for_investment = FXCollections.observableArrayList();
@@ -170,16 +182,6 @@ public class InvestmentWindowController implements Initializable {
         catch (Exception e){
             System.out.println("Нет обьектов");
         }
-    }
-
-    public void take_investment_from_table(MouseEvent event){
-        Investment investment = investment_table.getSelectionModel().getSelectedItem();
-        investment_textfield_name.setText(investment.getName());
-        investment_textfield_note.setText(investment.getNote());
-        investment_textfield_percent.setText(Double.toString(investment.getPercent()));
-        investment_textfield_amount.setText(investment.getAmount().toString());
-        investment_combobox_name.setValue(personService.findPerson(investment.getPerson_id()));
-        investment_datepicker_name.setValue(investment.getData().toLocalDate());
     }
 
     private void Timenow(){
