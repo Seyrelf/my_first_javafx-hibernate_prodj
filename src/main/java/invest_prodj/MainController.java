@@ -15,17 +15,21 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebHistory;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -44,168 +48,77 @@ public class MainController implements Initializable {
 
     public InvestmentService investmentService;
 
-    //Таблицы
-    @FXML
-    public TableView<Person> person_table;
-    @FXML
-    public  TableView<Investment> investment_table;
-
-    //Колонки таблицы
-    @FXML
-    public TableColumn<Investment,BigDecimal> investment_table_amount;
-    @FXML
-    public TableColumn<Investment,String> investment_table_date;
-    @FXML
-    public TableColumn<Investment,String> investment_table_name;
-    @FXML
-    public TableColumn<Investment,String> investment_table_note;
-    @FXML
-    public TableColumn<Investment,Double> investment_table_percent;
-    @FXML
-    public TableColumn<Investment,Integer> investment_table_id;
-    @FXML
-    public TableColumn<Person,String> person_table_name;
-    @FXML
-    public TableColumn<Person,Integer> person_table_id;
+    public MediaPlayer mediaPlayer;
 
     //Текста
     @FXML
     public Label time_label;
     @FXML
-    public Label amount_label;
+    public Label dollar_label;
     @FXML
-    public  Label amount_by_person_label;
+    public Label hkdollar_label;
+    @FXML
+    public Label btn_label;
+    @FXML
+    public Label ton_label;
+    @FXML
+    public Label my_capital_label;
+    @FXML
+    public Label mexc_capital_label;
+    @FXML
+    public Label tinkoff_capital_label;
+    @FXML
+    public Label study_week_label;
+    @FXML
+    public Label sport_week_label;
+    @FXML
+    public Label purpose_label;
+    @FXML
+    public TextField browser_find_textfield;
 
     //Кнопки
     @FXML
-    public Button main_window_btn;
+    public Button diary_btn;
     @FXML
-    public Button person_window_btn;
+    public Button investment_btn;
     @FXML
-    public Button investment_window_btn;
-    @FXML
-    public Button show_all_investment_btn;
+    public Button note_btn;
     @FXML
     public Button exit_btn;
+    @FXML
+    public Button find_btn;
+    @FXML
+    public Button refresh_btn;
+    @FXML
+    public Button back_btn;
+    @FXML
+    public Button zooomIn_btn;
+    @FXML
+    public Button zooomOut_btn;
+
+
+
+    @FXML
+    public WebView browser_webview;
+
+    public WebEngine engine;
+    public double webZoom;
+
+    public WebHistory history;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
+        engine = browser_webview.getEngine();
+        engine.load("http://google.com");
+        webZoom = 1;
+
+
         personService = new PersonService();
         investmentService = new InvestmentService();
-
-        investment_table_amount.setCellValueFactory(new PropertyValueFactory<Investment,BigDecimal>("amount"));
-        investment_table_date.setCellValueFactory(new PropertyValueFactory<Investment,String>("data"));
-        investment_table_name.setCellValueFactory(new PropertyValueFactory<Investment,String >("name"));
-        investment_table_note.setCellValueFactory(new PropertyValueFactory<Investment,String>("note"));
-        investment_table_percent.setCellValueFactory(new PropertyValueFactory<Investment,Double>("percent"));
-        investment_table_id.setCellValueFactory(new PropertyValueFactory<Investment,Integer>("id"));
-
-        person_table_name.setCellValueFactory(new PropertyValueFactory<Person,String>("name"));
-        person_table_id.setCellValueFactory(new PropertyValueFactory<Person,Integer>("id"));
-
-        set_amount_label();
-
-        show_all_investment();
-
-        show_all_person();
-
         Timenow();
+
     }
 
-    public void change_window_to_person(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(PersonWindowController.class.getResource("person_window.fxml"));
-        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setTitle("Редактор обьектов");
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void change_window_to_investment(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(InvestmentWindowController.class.getResource("investment_window.fxml"));
-        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setTitle("Редактор вложений");
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void change_window_to_main(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(MainController.class.getResource("main_back.fxml"));
-        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setTitle("Главное меню");
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void show_all_investment(ActionEvent e){
-        try{
-        list_for_investment = FXCollections.observableArrayList();
-        for(Investment i:investmentService.findAllInvestments()){
-            list_for_investment.add(i);
-        }
-        investment_table.setItems(list_for_investment);}
-        catch (Exception exception){
-            System.out.println("Нет вложений");
-        }
-    }
-
-    public void close_program(ActionEvent e){
-        System.exit(0);
-    }
-
-    public void show_investment_by_id_mouse_click(MouseEvent e){
-        try {
-            Person person = person_table.getSelectionModel().getSelectedItem();
-            investment_table.setItems(find_investment_by_idp(person.getId()));
-            amount_by_person_label.setText("Сумма по обьекту: "+ investmentService.amount_by_person(person.getId()));}
-        catch (Exception exception){
-            System.out.println("Выберите обьект");
-        }
-    }
-
-    public void show_all_investment(){
-        try{
-        list_for_investment = FXCollections.observableArrayList();
-        for(Investment i:investmentService.findAllInvestments()){
-            list_for_investment.add(i);
-        }
-        investment_table.setItems(list_for_investment);}
-        catch (Exception e){
-            System.out.println("Нет вложений");
-        }
-    }
-
-    public ObservableList<Investment> find_investment_by_idp(int id){
-        list_for_investment = FXCollections.observableArrayList();
-        for(Investment i:investmentService.findInvestmentByIdP(id)){
-            list_for_investment.add(i);
-        }
-
-        return list_for_investment;
-    }
-
-    public void show_all_person(){
-        try{
-        list_for_person = FXCollections.observableArrayList();
-        for(Person i:personService.findAllPersons()){
-            list_for_person.add(i);
-        }
-        person_table.setItems(list_for_person);}
-        catch (Exception e){
-            System.out.println("Нет обьектов");
-        }
-    }
-
-    public void set_amount_label(){
-        try {
-            amount_label.setText("Полная сумма: "+investmentService.amount_sum());
-        }
-        catch (Exception e) {
-            amount_label.setText("Полная сумма: 0");
-        }
-    }
 
     private void Timenow(){
         Thread thread = new Thread(() ->{
@@ -218,5 +131,70 @@ public class MainController implements Initializable {
                 Platform.runLater(()->{time_label.setText(sdf.format(new Date()));});}});
         thread.start();
     }
+
+    public void loadPage(){
+
+        engine.load("http://" + browser_find_textfield.getText()+".com");
+    }
+
+    public void switch_window_to_investment(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(MainController.class.getResource("investment_main_window.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setTitle("Меню управления капиталом");
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void load_btn(ActionEvent event){
+        try {
+            loadPage();
+        }
+        catch (Exception exception){
+            System.out.println("Пустая строка поиска");
+        }
+    }
+
+    public void reload_web_window(ActionEvent event){
+        engine.reload();
+
+    }
+
+    public void zoomIn(ActionEvent event){
+        webZoom += 0.25;
+        browser_webview.setZoom(webZoom);
+    }
+
+    public void zoomOut(ActionEvent event){
+        webZoom -= 0.25;
+        browser_webview.setZoom(webZoom);
+    }
+
+    public void back(ActionEvent event){
+        try {
+            history = engine.getHistory();
+            ObservableList<WebHistory.Entry> entries = history.getEntries();
+            history.go(-1);
+            browser_find_textfield.setText(entries.get(history.getCurrentIndex()).getUrl());
+        }
+        catch (Exception e){
+            System.out.println("Некуда переходить");
+        }}
+    public void forward(ActionEvent event){
+        try {
+            history = engine.getHistory();
+            ObservableList<WebHistory.Entry> entries = history.getEntries();
+            history.go(1);
+            browser_find_textfield.setText(entries.get(history.getCurrentIndex()).getUrl());
+        }
+        catch (Exception e){
+            System.out.println("Некуда переходить");
+        }
+
+    }
+
+    public void close_program(ActionEvent e){
+        System.exit(0);
+    }
+
 
 }

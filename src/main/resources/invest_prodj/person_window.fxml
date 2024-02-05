@@ -16,7 +16,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="main_window" depthTest="ENABLE" maxHeight="860.0" maxWidth="1320.0" minHeight="860.0" minWidth="1320.0" prefHeight="0.0" prefWidth="0.0" styleClass="anchor" stylesheets="@style/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="invest_prodj.PersonWindowController">
+<AnchorPane fx:id="main_window" depthTest="ENABLE" maxHeight="860.0" maxWidth="1320.0" minHeight="860.0" minWidth="1320.0" prefHeight="0.0" prefWidth="0.0" styleClass="anchor" stylesheets="@style/investment_main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="invest_prodj.PersonWindowController">
    <children>
       <ButtonBar fx:id="button_menu" buttonMinWidth="100.0" layoutX="-39.0" layoutY="9.0" maxHeight="198.0" maxWidth="1320.0" minHeight="60.0" minWidth="0.0" prefHeight="60.0" prefWidth="707.0" AnchorPane.leftAnchor="-39.0" AnchorPane.rightAnchor="652.0" AnchorPane.topAnchor="9.0">
         <buttons>

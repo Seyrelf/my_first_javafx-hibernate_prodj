@@ -23,7 +23,9 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -55,11 +57,11 @@ public class InvestmentWindowController implements Initializable {
     @FXML
     public TableColumn<Investment,Double> investment_table_percent;
     @FXML
-    public TableColumn<Investment,Integer> investment_table_person_name;
-    @FXML
     public TableColumn<Investment,Integer> investment_table_id;
     @FXML
     public TableColumn<Investment,Integer> investment_table_person_id;
+    @FXML
+    public TableColumn<Person,String> investment_table_person_name;
 
     //Текстовые обьекты
     @FXML
@@ -98,10 +100,10 @@ public class InvestmentWindowController implements Initializable {
         investment_table_percent.setCellValueFactory(new PropertyValueFactory<Investment,Double>("percent"));
         investment_table_person_id.setCellValueFactory(new PropertyValueFactory<Investment,Integer>("person_id"));
 
+
         show_all_investment();
         show_all_person();
-        Timenow();
-    }
+        Timenow();   }
 
     public void change_window_to_person(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(PersonWindowController.class.getResource("person_window.fxml"));
@@ -113,10 +115,10 @@ public class InvestmentWindowController implements Initializable {
     }
 
     public void change_window_to_main(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(MainController.class.getResource("main_back.fxml"));
+        Parent root = FXMLLoader.load(MainController.class.getResource("investment_main_window.fxml"));
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        stage.setTitle("Главное меню");
+        stage.setTitle("Меню управления капиталом");
         stage.setScene(scene);
         stage.show();
     }
@@ -156,7 +158,7 @@ public class InvestmentWindowController implements Initializable {
         investment_textfield_note.setText(investment.getNote());
         investment_textfield_percent.setText(Double.toString(investment.getPercent()));
         investment_textfield_amount.setText(investment.getAmount().toString());
-        investment_combobox_name.setValue(personService.findPerson(investment.getPerson_id()));
+        investment_combobox_name.setValue(personService.findPersonForCombobox(investment.getPerson_id()));
         investment_datepicker_name.setValue(investment.getData().toLocalDate());
     }
 
@@ -176,6 +178,9 @@ public class InvestmentWindowController implements Initializable {
         try{
             list_for_person = FXCollections.observableArrayList();
             for(Person i:personService.findAllPersons()){
+                i.setNote(null);
+                i.setPhone_number(null);
+                i.setInvestments(null);
                 list_for_person.add(i);
             }
             investment_combobox_name.setItems(list_for_person);}

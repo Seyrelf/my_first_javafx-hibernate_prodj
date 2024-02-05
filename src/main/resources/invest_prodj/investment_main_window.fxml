@@ -14,9 +14,9 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="main_window" depthTest="ENABLE" maxHeight="860.0" maxWidth="1320.0" minHeight="860.0" minWidth="1320.0" prefHeight="0.0" prefWidth="0.0" styleClass="anchor" stylesheets="@style/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="invest_prodj.MainController">
+<AnchorPane fx:id="investment_main_window" depthTest="ENABLE" maxHeight="860.0" maxWidth="1320.0" minHeight="860.0" minWidth="1320.0" prefHeight="0.0" prefWidth="0.0" styleClass="anchor" stylesheets="@style/investment_main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="invest_prodj.InvestmentMainWindowController">
    <children>
-      <ButtonBar fx:id="button_menu" buttonMinWidth="100.0" layoutX="-7.0" maxHeight="150.0" maxWidth="1320.0" minHeight="60.0" minWidth="0.0" prefHeight="60.0" prefWidth="1320.0" AnchorPane.leftAnchor="-7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="10.0">
+      <ButtonBar fx:id="button_menu" buttonMinWidth="100.0" layoutX="-7.0" maxHeight="150.0" maxWidth="1320.0" minHeight="60.0" minWidth="0.0" prefHeight="60.0" prefWidth="1265.0" AnchorPane.leftAnchor="-7.0" AnchorPane.rightAnchor="62.0" AnchorPane.topAnchor="10.0">
         <buttons>
             <Button fx:id="main_window_btn" alignment="CENTER" cache="true" cacheHint="SPEED" contentDisplay="CENTER" maxHeight="50.0" maxWidth="205.0" minHeight="50.0" mnemonicParsing="false" onAction="#change_window_to_main" opacity="0.95" prefHeight="50.0" prefWidth="703.0" style="-fx-background-color: #ADD8E6;" styleClass="btn" text="Главное меню" textAlignment="CENTER" textFill="#171717" textOverrun="CLIP" wrapText="true">
                <font>
@@ -90,24 +90,6 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button alignment="CENTER" cache="true" cacheHint="SPEED" contentDisplay="CENTER" maxHeight="50.0" maxWidth="220.0" minHeight="50.0" mnemonicParsing="false" opacity="0.95" prefHeight="45.0" style="-fx-background-color: #ADD8E6;" styleClass="btn" text="Дневник" textAlignment="CENTER" textFill="#171717" textOverrun="CLIP" wrapText="true">
-               <font>
-                  <Font name="Arial Black" size="14.0" />
-               </font>
-               <effect>
-                  <InnerShadow height="44.45" radius="15.8625">
-                     <color>
-                        <Color red="0.17105263471603394" green="0.10233917832374573" blue="0.7894737124443054" />
-                     </color>
-                  </InnerShadow>
-               </effect>
-               <opaqueInsets>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </opaqueInsets>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
             <Button fx:id="exit_btn" alignment="CENTER" cache="true" cacheHint="SPEED" contentDisplay="CENTER" maxHeight="50.0" maxWidth="151.0" minHeight="50.0" mnemonicParsing="false" onAction="#close_program" opacity="0.95" prefHeight="50.0" style="-fx-background-color: #ADD8E6;" styleClass="btn" text="Выход" textAlignment="CENTER" textFill="#171717" textOverrun="CLIP" wrapText="true">
                <font>
                   <Font name="Arial Black" size="14.0" />
@@ -128,7 +110,7 @@
             </Button>
         </buttons>
       </ButtonBar>
-      <TableView fx:id="investment_table" editable="true" layoutX="147.0" layoutY="82.0" opacity="0.95" prefHeight="680.0" prefWidth="1135.0" style="-fx-background-color: #ADD8E6;" styleClass="tableview" stylesheets="@style/main.css" AnchorPane.leftAnchor="175.0">
+      <TableView fx:id="investment_table" editable="true" layoutX="147.0" layoutY="82.0" opacity="0.95" prefHeight="680.0" prefWidth="1135.0" style="-fx-background-color: #ADD8E6;" styleClass="tableview" AnchorPane.leftAnchor="175.0">
         <columns>
           <TableColumn fx:id="investment_table_amount" prefWidth="124.0" text="Сумма" />
           <TableColumn fx:id="investment_table_date" prefWidth="122.0" text="Дата" />
@@ -194,12 +176,12 @@
             <InnerShadow choke="0.56" height="97.57" radius="49.66" width="103.07" />
          </effect>
       </Label>
-      <ImageView fx:id="img_main_left" fitHeight="160.0" fitWidth="134.0" layoutX="14.0" layoutY="693.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="img_main_left" fitHeight="160.0" fitWidth="134.0" layoutX="14.0" layoutY="693.0" onMouseClicked="#sound_naruto" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@style/img/naruto2.gif" />
          </image>
       </ImageView>
-      <ImageView fx:id="img_main_right" fitHeight="112.0" fitWidth="124.0" layoutX="1198.0" layoutY="748.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="img_main_right" fitHeight="112.0" fitWidth="124.0" layoutX="1198.0" layoutY="748.0" onMouseClicked="#sound_sasuke" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@style/img/sasuke.gif" />
          </image>

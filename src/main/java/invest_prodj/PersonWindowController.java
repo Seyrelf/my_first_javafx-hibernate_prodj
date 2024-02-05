@@ -88,10 +88,10 @@ public class PersonWindowController implements Initializable {
     }
 
     public void change_window_to_main(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(MainController.class.getResource("main_back.fxml"));
+        Parent root = FXMLLoader.load(MainController.class.getResource("investment_main_window.fxml"));
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        stage.setTitle("Главное меню");
+        stage.setTitle("Меню управления капиталом");
         stage.setScene(scene);
         stage.show();
     }

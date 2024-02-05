@@ -1,13 +1,9 @@
 .anchor {
-    -fx-background-image:url("img/fon.png");
+    -fx-background-image:url("img/main.png");
     -fx-height: 100%;
 
     /* Center and scale the image nicely */
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
-}
-
-.table_view{
-    -fx-alignment: center-right;
 }
