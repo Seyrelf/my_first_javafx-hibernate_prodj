@@ -8,7 +8,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-
+import  Mexc.Sdk.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -106,8 +106,11 @@ public class MainController implements Initializable {
 
     public WebHistory history;
 
+    public String tinkoff_token;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
+        tinkoff_token = Key.getTinkoff_token();
         engine = browser_webview.getEngine();
         engine.load("http://google.com");
         webZoom = 1;
