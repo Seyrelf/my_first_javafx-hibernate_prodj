@@ -1,14 +1,11 @@
 package invest_prodj;
 
 import invest_prodj.model.Investment;
-import invest_prodj.model.Person;
+import invest_prodj.service.DiaryService;
 import invest_prodj.service.InvestmentService;
-import invest_prodj.service.PersonService;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import  Mexc.Sdk.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,39 +13,32 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-
+import ru.tinkoff.piapi.core.InvestApi;
+import ru.tinkoff.piapi.core.models.Portfolio;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
-import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
+
 
 public class MainController implements Initializable {
 
     private Stage stage;
     private Scene scene;
     private Parent root;
-
-    public ObservableList<Person> list_for_person;
-
-    public ObservableList<Investment> list_for_investment;
-
-    public PersonService personService;
-
     public InvestmentService investmentService;
-
-    public MediaPlayer mediaPlayer;
+    public DiaryService diaryService;
+    public WebEngine engine;
+    public double webZoom;
+    public WebHistory history;
+    public String tinkoff_token;
 
     //Текста
     @FXML
@@ -86,42 +76,62 @@ public class MainController implements Initializable {
     @FXML
     public Button exit_btn;
     @FXML
-    public Button find_btn;
+    public Button find_web_btn;
     @FXML
-    public Button refresh_btn;
+    public Button refresh_web_btn;
     @FXML
-    public Button back_btn;
+    public Button back_web_btn;
     @FXML
-    public Button zooomIn_btn;
+    public Button zooomIn_web_btn;
     @FXML
-    public Button zooomOut_btn;
-
-
-
+    public Button zooomOut_web_btn;
     @FXML
     public WebView browser_webview;
 
-    public WebEngine engine;
-    public double webZoom;
-
-    public WebHistory history;
-
-    public String tinkoff_token;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
-        tinkoff_token = Key.getTinkoff_token();
         engine = browser_webview.getEngine();
         engine.load("http://google.com");
         webZoom = 1;
-
-
-        personService = new PersonService();
         investmentService = new InvestmentService();
+        set_info_to_label();
         Timenow();
-
     }
 
+    public String get_amount_from_tinkoff(){
+        tinkoff_token = Key.getTinkoff_token();
+        InvestApi api = InvestApi.create(tinkoff_token);
+        List<ru.tinkoff.piapi.contract.v1.Account> accounts = api.getUserService().getAccountsSync();
+        String ac_one = accounts.get(0).getId();
+        String ac_two = accounts.get(1).getId();
+        Portfolio portfolio1 = api.getOperationsService().getPortfolioSync(ac_one);
+        Portfolio portfolio2 = api.getOperationsService().getPortfolioSync(ac_two);
+        BigDecimal inv_schet_amount = portfolio1.getTotalAmountPortfolio().getValue();
+        BigDecimal ind_inv_schet_amount = portfolio2.getTotalAmountPortfolio().getValue();
+        String amount_invest = String.format("%.2f",ind_inv_schet_amount.add(inv_schet_amount));
+        Investment tinkof_invest = investmentService.findInvestment(23);
+        tinkof_invest.setAmount(inv_schet_amount);
+        Investment tinkof_ind_invest = investmentService.findInvestment(32);
+        tinkof_ind_invest.setAmount(ind_inv_schet_amount);
+        investmentService.updateInvestment(tinkof_invest);
+        investmentService.updateInvestment(tinkof_ind_invest);
+        return amount_invest;
+    }
+
+    public void set_info_to_label(){
+        diaryService = new DiaryService();
+        sport_week_label.setText("  Спорт за неделю: "+diaryService.sport_for_week_sum().toString());
+        study_week_label.setText("  Учеба за неделю: "+diaryService.learn_for_week_sum().toString());
+
+        tinkoff_capital_label.setText("  Капитал Тинькофф: " + get_amount_from_tinkoff());
+        try {
+            my_capital_label.setText("  Полная сумма: "+investmentService.amount_sum());
+        }
+        catch (Exception e) {
+            my_capital_label.setText("  Полная сумма: 0");
+        }
+    }
 
     private void Timenow(){
         Thread thread = new Thread(() ->{
@@ -136,15 +146,23 @@ public class MainController implements Initializable {
     }
 
     public void loadPage(){
-
         engine.load("http://" + browser_find_textfield.getText()+".com");
     }
 
     public void switch_window_to_investment(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(MainController.class.getResource("investment_main_window.fxml"));
+        root = FXMLLoader.load(MainController.class.getResource("investment_main_window.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setTitle("Меню управления капиталом");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void switch_window_to_diary(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(MainController.class.getResource("diary.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setTitle("Дневник");
         stage.setScene(scene);
         stage.show();
     }
@@ -182,6 +200,7 @@ public class MainController implements Initializable {
         catch (Exception e){
             System.out.println("Некуда переходить");
         }}
+
     public void forward(ActionEvent event){
         try {
             history = engine.getHistory();

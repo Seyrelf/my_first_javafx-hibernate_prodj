@@ -18,7 +18,7 @@
    <children>
       <ButtonBar fx:id="button_menu" buttonMinWidth="100.0" layoutX="89.0" maxHeight="150.0" maxWidth="1320.0" minHeight="60.0" minWidth="0.0" prefHeight="60.0" prefWidth="1111.0" AnchorPane.leftAnchor="89.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="10.0">
         <buttons>
-            <Button fx:id="diary_btn" alignment="CENTER" cache="true" cacheHint="SPEED" contentDisplay="CENTER" maxHeight="50.0" maxWidth="205.0" minHeight="50.0" mnemonicParsing="false" opacity="0.95" prefHeight="50.0" prefWidth="703.0" style="-fx-background-color: #B0C4DE; -fx-background-radius: 10px;" styleClass="btn" text="Ежедневник" textAlignment="CENTER" textFill="#171717" textOverrun="CLIP" wrapText="true">
+            <Button fx:id="diary_btn" alignment="CENTER" cache="true" cacheHint="SPEED" contentDisplay="CENTER" maxHeight="50.0" maxWidth="205.0" minHeight="50.0" mnemonicParsing="false" onAction="#switch_window_to_diary" opacity="0.95" prefHeight="50.0" prefWidth="703.0" style="-fx-background-color: #B0C4DE; -fx-background-radius: 10px;" styleClass="btn" text="Ежедневник" textAlignment="CENTER" textFill="#171717" textOverrun="CLIP" wrapText="true">
                <font>
                   <Font name="Comic Sans MS Bold" size="16.0" />
                </font>
@@ -98,18 +98,6 @@
                   </InnerShadow>
                </effect>
             </Label>
-            <Label fx:id="mexc_capital_label" maxHeight="30.0" maxWidth="400.0" minHeight="40.0" minWidth="300.0" opacity="0.85" prefHeight="75.0" prefWidth="390.0" style="-fx-background-color: #87CEEB; -fx-background-radius: 20px;" text="  Капитал MEXC:">
-               <font>
-                  <Font name="Comic Sans MS Bold" size="23.0" />
-               </font>
-               <effect>
-                  <InnerShadow choke="0.1" height="31.95" radius="14.2025" width="26.86">
-                     <color>
-                        <Color red="0.10526315867900848" green="0.10526315867900848" blue="0.014132553711533546" />
-                     </color>
-                  </InnerShadow>
-               </effect>
-            </Label>
             <Label fx:id="tinkoff_capital_label" maxHeight="30.0" maxWidth="438.0" minHeight="40.0" minWidth="300.0" opacity="0.85" prefHeight="60.0" prefWidth="438.0" style="-fx-background-color: #87CEEB; -fx-background-radius: 20px;" text="  Капитал Тинькофф:">
                <font>
                   <Font name="Comic Sans MS Bold" size="23.0" />
@@ -146,7 +134,7 @@
                   </InnerShadow>
                </effect>
             </Label>
-            <Label fx:id="purpose_label" maxHeight="30.0" maxWidth="801.0" minHeight="40.0" minWidth="300.0" opacity="0.85" prefHeight="60.0" prefWidth="620.0" style="-fx-background-color: #87CEEB; -fx-background-radius: 20px;" text="  Текущая цель:">
+            <Label fx:id="purpose_label" maxHeight="40.0" maxWidth="898.0" minHeight="40.0" minWidth="300.0" opacity="0.85" prefHeight="40.0" prefWidth="898.0" style="-fx-background-color: #87CEEB; -fx-background-radius: 20px;" text="  Текущая цель:">
                <font>
                   <Font name="Comic Sans MS Bold" size="23.0" />
                </font>
@@ -178,32 +166,32 @@
          </effect></TextField>
       <HBox layoutX="28.0" layoutY="78.0" prefHeight="25.0" prefWidth="200.0" spacing="3.0">
          <children>
-            <Button fx:id="find_btn" mnemonicParsing="false" onAction="#load_btn" style="-fx-background-color: #B0C4DE;" text="🔎">
+            <Button fx:id="find_web_btn" mnemonicParsing="false" onAction="#load_btn" style="-fx-background-color: #B0C4DE;" text="🔎">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="refresh_btn" mnemonicParsing="false" onAction="#reload_web_window" style="-fx-background-color: #B0C4DE;" text="⇅">
+            <Button fx:id="refresh_web_btn" mnemonicParsing="false" onAction="#reload_web_window" style="-fx-background-color: #B0C4DE;" text="⇅">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="back_btn" mnemonicParsing="false" onAction="#back" style="-fx-background-color: #B0C4DE;" text="🢠">
+            <Button fx:id="back_web_btn" mnemonicParsing="false" onAction="#back" style="-fx-background-color: #B0C4DE;" text="🢠">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button fx:id="forward_btn" mnemonicParsing="false" onAction="#forward" style="-fx-background-color: #B0C4DE;" text="🢡">
+            <Button fx:id="forward_web_btn" mnemonicParsing="false" onAction="#forward" style="-fx-background-color: #B0C4DE;" text="🢡">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="zooomIn_btn" mnemonicParsing="false" onAction="#zoomIn" style="-fx-background-color: #B0C4DE;" text="+">
+            <Button fx:id="zooomIn_web_btn" mnemonicParsing="false" onAction="#zoomIn" style="-fx-background-color: #B0C4DE;" text="+">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="zooomOut_btn" mnemonicParsing="false" onAction="#zoomOut" style="-fx-background-color: #B0C4DE;" text="-">
+            <Button fx:id="zooomOut_web_btn" mnemonicParsing="false" onAction="#zoomOut" style="-fx-background-color: #B0C4DE;" text="-">
                <font>
                   <Font size="14.0" />
                </font>

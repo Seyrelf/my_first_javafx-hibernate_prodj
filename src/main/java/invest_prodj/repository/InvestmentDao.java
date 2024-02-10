@@ -9,7 +9,12 @@ import java.util.List;
 public class InvestmentDao {
 
     public Investment findById(int id){
-        return HibernateSession.getSessionFactory().openSession().get(Investment.class,id);
+        Session session = HibernateSession.getSessionFactory().openSession();
+        Transaction tx1 = session.beginTransaction();
+        Investment investment = session.find(Investment.class,id);
+        tx1.commit();
+        session.close();
+        return investment;
     }
 
     public void save(Investment investment){

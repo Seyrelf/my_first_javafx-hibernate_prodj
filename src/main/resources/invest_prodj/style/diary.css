@@ -1,0 +1,34 @@
+.anchor {
+    -fx-background-image:url("img/diary.png");
+    -fx-height: 100%;
+
+    /* Center and scale the image nicely */
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+}
+
+.day {
+    -fx-background-image:url("img/diary.png");
+    -fx-height: 100%;
+
+    /* Center and scale the image nicely */
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+}
+
+.text-area {
+    text-area-background:  #DEB887 ;
+}
+
+.text-area .content {
+    -fx-background-color: text-area-background ;
+}
+
+.table-view .column-header-background{
+    -fx-background-color: linear-gradient(to bottom,  #800000,#B22222);
+}
+.table-view .column-header {
+    -fx-background-color: transparent;
+}

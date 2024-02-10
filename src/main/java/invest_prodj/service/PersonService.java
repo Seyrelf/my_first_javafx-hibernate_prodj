@@ -3,10 +3,7 @@ package invest_prodj.service;
 import invest_prodj.model.Investment;
 import invest_prodj.model.Person;
 import invest_prodj.repository.PersonDao;
-
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 public class PersonService {

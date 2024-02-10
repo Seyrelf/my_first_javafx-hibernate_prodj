@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ButtonType?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<DialogPane fx:id="day_dialog" minHeight="600.0" minWidth="960.0" prefWidth="0.0" styleClass="day" stylesheets="@style/diary.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <buttonTypes>
+      <ButtonType fx:constant="OK" />
+   </buttonTypes>
+   <content>
+      <AnchorPane prefHeight="200.0" prefWidth="700.0">
+         <children>
+            <Label fx:id="dialog_date_label" layoutX="14.0" layoutY="14.0" prefHeight="35.0" prefWidth="168.0" style="-fx-background-color: #DEB887;" text=" Дата:">
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+               <effect>
+                  <InnerShadow choke="0.4">
+                     <color>
+                        <Color red="0.40784314274787903" green="0.1921568661928177" blue="0.10196078568696976" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Label>
+            <Label fx:id="dialog_sport_time_label" layoutX="198.0" layoutY="14.0" prefHeight="35.0" prefWidth="169.0" style="-fx-background-color: #DEB887;" text=" Часы спорта:">
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+               <effect>
+                  <InnerShadow choke="0.4">
+                     <color>
+                        <Color red="0.40784314274787903" green="0.1921568661928177" blue="0.10196078568696976" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Label>
+            <Label fx:id="dialog_note_label" layoutX="5.0" layoutY="59.0" minHeight="35.0" minWidth="125.0" prefHeight="0.0" prefWidth="0.0" style="-fx-background-color: #DEB887;" text=" Заметки" textAlignment="CENTER">
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+               <effect>
+                  <InnerShadow choke="0.4">
+                     <color>
+                        <Color red="0.40784314274787903" green="0.1921568661928177" blue="0.10196078568696976" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Label>
+            <Label fx:id="dialog_learn_time_label" layoutX="376.0" layoutY="14.0" prefHeight="35.0" prefWidth="179.0" style="-fx-background-color: #DEB887;" text=" Часы учебы:">
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+               <effect>
+                  <InnerShadow choke="0.4">
+                     <color>
+                        <Color red="0.40784314274787903" green="0.1921568661928177" blue="0.10196078568696976" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Label>
+            <Label fx:id="dialog_learn_info_label" layoutX="5.0" layoutY="376.0" minHeight="35.0" minWidth="125.0" prefHeight="0.0" prefWidth="0.0" style="-fx-background-color: #DEB887;" text="Об учебе" textAlignment="CENTER">
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+               <effect>
+                  <InnerShadow choke="0.4">
+                     <color>
+                        <Color red="0.40784314274787903" green="0.1921568661928177" blue="0.10196078568696976" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Label>
+            <Label fx:id="dialog_sport_info_label" layoutX="5.0" layoutY="218.0" minHeight="35.0" minWidth="125.0" prefHeight="0.0" prefWidth="0.0" style="-fx-background-color: #DEB887;" text=" О тренировке" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+               <effect>
+                  <InnerShadow choke="0.4">
+                     <color>
+                        <Color red="0.40784314274787903" green="0.1921568661928177" blue="0.10196078568696976" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Label>
+            <TextArea fx:id="dialog_note_textarea" editable="false" layoutX="133.0" layoutY="59.0" opacity="0.91" prefHeight="151.0" prefWidth="823.0" scrollLeft="5.0" styleClass="textArea" wrapText="true">
+               <effect>
+                  <InnerShadow />
+               </effect>
+               <font>
+                  <Font name="Arial Black" size="13.0" />
+               </font>
+            </TextArea>
+            <TextArea fx:id="dialog_sport_info_textarea" editable="false" layoutX="133.0" layoutY="218.0" opacity="0.91" prefHeight="151.0" prefWidth="823.0" scrollLeft="5.0" styleClass="textArea" wrapText="true">
+               <effect>
+                  <InnerShadow />
+               </effect>
+               <font>
+                  <Font name="Arial Black" size="13.0" />
+               </font>
+            </TextArea>
+            <TextArea fx:id="dialog_learn_info_textarea" editable="false" layoutX="133.0" layoutY="376.0" opacity="0.91" prefHeight="151.0" prefWidth="823.0" scrollLeft="5.0" styleClass="textArea" wrapText="true">
+               <effect>
+                  <InnerShadow />
+               </effect>
+               <font>
+                  <Font name="Arial Black" size="13.0" />
+               </font>
+            </TextArea>
+         </children>
+      </AnchorPane>
+   </content>
+</DialogPane>

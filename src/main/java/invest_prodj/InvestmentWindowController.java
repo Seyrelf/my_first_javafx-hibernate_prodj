@@ -18,14 +18,11 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -60,8 +57,6 @@ public class InvestmentWindowController implements Initializable {
     public TableColumn<Investment,Integer> investment_table_id;
     @FXML
     public TableColumn<Investment,Integer> investment_table_person_id;
-    @FXML
-    public TableColumn<Person,String> investment_table_person_name;
 
     //Текстовые обьекты
     @FXML
@@ -146,8 +141,8 @@ public class InvestmentWindowController implements Initializable {
         investment.setData(java.sql.Date.valueOf(investment_datepicker_name.getValue()));
         investmentService.updateInvestment(investment);
         show_all_investment();
-
     }
+
     public void close_program(ActionEvent e){
         System.exit(0);
     }

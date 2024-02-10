@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="main_window" depthTest="ENABLE" maxHeight="860.0" maxWidth="1320.0" minHeight="860.0" minWidth="1320.0" prefHeight="732.0" prefWidth="714.0" styleClass="anchor" stylesheets="@style/diary.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="invest_prodj.DiaryController">
+   <children>
+      <ButtonBar fx:id="button_menu" buttonMinWidth="100.0" layoutX="-39.0" layoutY="9.0" maxHeight="198.0" maxWidth="1320.0" minHeight="60.0" minWidth="0.0" prefHeight="60.0" prefWidth="595.0" AnchorPane.leftAnchor="-39.0" AnchorPane.rightAnchor="764.0" AnchorPane.topAnchor="9.0">
+        <buttons>
+            <Button fx:id="look_day_btn" alignment="CENTER" cache="true" cacheHint="SPEED" contentDisplay="CENTER" maxHeight="50.0" maxWidth="208.0" minHeight="50.0" mnemonicParsing="false" onAction="#show_day" opacity="0.95" prefHeight="50.0" prefWidth="208.0" style="-fx-background-color: #800000;" styleClass="btn" text="Просмотреть день" textAlignment="CENTER" textFill="#171717" textOverrun="CLIP" wrapText="true">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="44.45" radius="15.8625">
+                     <color>
+                        <Color red="0.029999999329447746" green="0.029999999329447746" blue="0.029999999329447746" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+               <opaqueInsets>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </opaqueInsets>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="main_window_btn" alignment="CENTER" cache="true" cacheHint="SPEED" contentDisplay="CENTER" maxHeight="50.0" maxWidth="152.0" minHeight="50.0" mnemonicParsing="false" onAction="#change_window_to_main" opacity="0.95" prefHeight="50.0" prefWidth="152.0" style="-fx-background-color: #800000;" styleClass="btn" text="Главное меню" textAlignment="CENTER" textFill="#171717" textOverrun="CLIP" wrapText="true">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="44.45" radius="15.8625">
+                     <color>
+                        <Color red="0.029999999329447746" green="0.029999999329447746" blue="0.029999999329447746" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+               <opaqueInsets>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </opaqueInsets>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="exit_btn" alignment="CENTER" cache="true" cacheHint="SPEED" contentDisplay="CENTER" maxHeight="50.0" maxWidth="151.0" minHeight="50.0" mnemonicParsing="false" onAction="#close_program" opacity="0.95" prefHeight="50.0" style="-fx-background-color: #800000;" styleClass="btn" text="Выход" textAlignment="CENTER" textFill="#171717" textOverrun="CLIP" wrapText="true">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="44.45" radius="15.8625">
+                     <color>
+                        <Color red="0.029999999329447746" green="0.029999999329447746" blue="0.029999999329447746" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+               <opaqueInsets>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </opaqueInsets>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+        </buttons>
+      </ButtonBar>
+      <TableView fx:id="diary_table" editable="true" layoutX="10.0" layoutY="71.0" onMouseClicked="#take_day_from_diary_table" opacity="0.95" prefHeight="637.0" prefWidth="1300.0" style="-fx-background-color: #FFF8DC;" styleClass="tableview" AnchorPane.leftAnchor="10.0">
+        <columns>
+            <TableColumn fx:id="diary_table_date" prefWidth="122.0" style="-fx-alignment: center;" text="Дата" />
+            <TableColumn fx:id="diary_table_note" prefWidth="560.0" text="Примечание" />
+            <TableColumn fx:id="diary_table_id" maxWidth="10.0" prefWidth="10.0" text="id" visible="false" />
+            <TableColumn fx:id="diary_table_learn_info" prefWidth="122.0" style="-fx-alignment: center;" text="Учеба" />
+            <TableColumn fx:id="diary_table_sport_info" prefWidth="122.0" style="-fx-alignment: center;" text="Спорт" />
+            <TableColumn fx:id="diary_table_learn_time" prefWidth="122.0" style="-fx-alignment: center;" text="Ч/Y" />
+            <TableColumn fx:id="diary_table_sport_time" prefWidth="122.0" style="-fx-alignment: center;" text="Ч/C" />
+        </columns>
+         <effect>
+            <InnerShadow choke="0.24" height="15.94" radius="3.485" width="0.0">
+               <color>
+                  <Color red="0.019999999552965164" green="0.019999999552965164" blue="0.019999999552965164" />
+               </color>
+            </InnerShadow>
+         </effect>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <Label fx:id="time_label" alignment="CENTER" contentDisplay="CENTER" layoutX="1150.0" layoutY="7.0" opacity="0.69" prefHeight="60.0" prefWidth="152.0" style="-fx-background-radius: 30px; -fx-background-color: #008000;" text="zsss" textFill="#3c0606">
+         <font>
+            <Font name="Verdana Bold" size="23.0" />
+         </font>
+         <effect>
+            <InnerShadow choke="0.29" height="42.99" radius="13.3" width="12.21">
+               <color>
+                  <Color opacity="0.732824444770813" />
+               </color></InnerShadow>
+         </effect>
+      </Label>
+      <Button fx:id="diary_delete_btn" alignment="CENTER" cache="true" cacheHint="SPEED" contentDisplay="CENTER" layoutX="1146.0" layoutY="800.0" maxHeight="38.0" maxWidth="160.0" minHeight="38.0" minWidth="160.0" mnemonicParsing="false" onAction="#delete_diary" opacity="0.95" prefHeight="30.0" prefWidth="703.0" style="-fx-background-color: #800000;" styleClass="btn" text="Удалить" textAlignment="CENTER" textFill="#171717" textOverrun="CLIP" wrapText="true">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font>
+         <effect>
+            <InnerShadow height="44.45" radius="15.8625" />
+         </effect>
+         <opaqueInsets>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </opaqueInsets>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="diary_create_btn" alignment="CENTER" cache="true" cacheHint="SPEED" contentDisplay="CENTER" layoutX="1146.0" layoutY="720.0" maxHeight="38.0" maxWidth="160.0" minHeight="38.0" minWidth="160.0" mnemonicParsing="false" onAction="#create_diary" opacity="0.95" prefHeight="30.0" prefWidth="703.0" style="-fx-background-color: #008000;" styleClass="btn" text="Создать" textAlignment="CENTER" textFill="#171717" textOverrun="CLIP" wrapText="true">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font>
+         <effect>
+            <InnerShadow height="44.45" radius="15.8625" />
+         </effect>
+         <opaqueInsets>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </opaqueInsets>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <FlowPane alignment="CENTER" hgap="2.0" layoutX="-3.0" layoutY="698.0" prefHeight="162.0" prefWidth="1146.0" vgap="15.0">
+         <children>
+            <Label fx:id="diary_label_date" alignment="CENTER" contentDisplay="CENTER" maxHeight="55.0" maxWidth="150.0" minHeight="55.0" minWidth="150.0" prefHeight="55.0" prefWidth="121.0" style="-fx-background-color: #DEB887;" text="Дата" textAlignment="RIGHT">
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+               <effect>
+                  <InnerShadow choke="0.4" height="18.07" radius="9.2675">
+                     <color>
+                        <Color red="0.40784314274787903" green="0.1921568661928177" blue="0.10196078568696976" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Label>
+            <DatePicker fx:id="diary_datepicker" maxHeight="55.0" maxWidth="170.0" minHeight="55.0" minWidth="113.0" opacity="0.9" prefHeight="55.0" prefWidth="113.0">
+               <effect>
+                  <InnerShadow choke="0.28" height="24.25" radius="11.5625" width="24.0">
+                     <color>
+                        <Color red="0.08627451211214066" green="0.04313725605607033" blue="0.1725490242242813" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </DatePicker>
+            <Label fx:id="diary_label_note" alignment="CENTER" contentDisplay="CENTER" maxHeight="55.0" maxWidth="150.0" minHeight="55.0" minWidth="150.0" prefHeight="55.0" prefWidth="143.0" style="-fx-background-color: #DEB887;" text="Заметки" textAlignment="RIGHT">
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+               <effect>
+                  <InnerShadow choke="0.4" height="18.07" radius="9.2675">
+                     <color>
+                        <Color red="0.40789473056793213" green="0.1924281120300293" blue="0.10008528083562851" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Label>
+            <TextField fx:id="diary_textField_note" maxHeight="55.0" maxWidth="673.0" minHeight="55.0" minWidth="170.0" opacity="0.9" prefHeight="55.0" prefWidth="673.0" style="-fx-background-color: #800000; -fx-text-inner-color: #DEB887;">
+               <effect>
+                  <InnerShadow height="44.45" radius="15.8625">
+                     <color>
+                        <Color red="0.029999999329447746" green="0.029999999329447746" blue="0.029999999329447746" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+            </TextField>
+            <Label fx:id="diary_label_learn" alignment="CENTER" contentDisplay="CENTER" maxHeight="55.0" maxWidth="150.0" minHeight="55.0" minWidth="150.0" prefHeight="55.0" prefWidth="143.0" style="-fx-background-color: #DEB887;" text="Учеба" textAlignment="RIGHT">
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+               <effect>
+                  <InnerShadow choke="0.4" height="18.07" radius="9.2675">
+                     <color>
+                        <Color red="0.40789473056793213" green="0.1924281120300293" blue="0.10008528083562851" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Label>
+            <TextField fx:id="diary_textField_learn" maxHeight="55.0" maxWidth="170.0" minHeight="55.0" minWidth="170.0" opacity="0.9" prefHeight="55.0" prefWidth="198.0" style="-fx-background-color: #800000; -fx-text-inner-color: #DEB887;">
+               <effect>
+                  <InnerShadow height="44.45" radius="15.8625">
+                     <color>
+                        <Color red="0.029999999329447746" green="0.029999999329447746" blue="0.029999999329447746" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+            </TextField>
+            <Label fx:id="diary_label_sport" alignment="CENTER" contentDisplay="CENTER" maxHeight="55.0" maxWidth="150.0" minHeight="55.0" minWidth="150.0" prefHeight="55.0" prefWidth="143.0" style="-fx-background-color: #DEB887;" text="Спорт" textAlignment="RIGHT">
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+               <effect>
+                  <InnerShadow choke="0.4" height="18.07" radius="9.2675">
+                     <color>
+                        <Color red="0.40789473056793213" green="0.1924281120300293" blue="0.10008528083562851" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Label>
+            <TextField fx:id="diary_textField_sport" maxHeight="55.0" maxWidth="170.0" minHeight="55.0" minWidth="170.0" opacity="0.9" prefHeight="55.0" prefWidth="198.0" style="-fx-background-color: #800000; -fx-text-inner-color: #DEB887;">
+               <effect>
+                  <InnerShadow height="44.45" radius="15.8625">
+                     <color>
+                        <Color red="0.029999999329447746" green="0.029999999329447746" blue="0.029999999329447746" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+            </TextField>
+            <Label fx:id="diary_label_learn_time" alignment="CENTER" contentDisplay="CENTER" maxHeight="55.0" maxWidth="150.0" minHeight="55.0" minWidth="150.0" prefHeight="55.0" prefWidth="143.0" style="-fx-background-color: #DEB887;" text="Часы учебы" textAlignment="RIGHT">
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+               <effect>
+                  <InnerShadow choke="0.4" height="18.07" radius="9.2675">
+                     <color>
+                        <Color red="0.40789473056793213" green="0.1924281120300293" blue="0.10008528083562851" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Label>
+            <TextField fx:id="diary_textField_learn_time" maxHeight="55.0" maxWidth="70.0" minHeight="55.0" minWidth="40.0" opacity="0.9" prefHeight="55.0" prefWidth="79.0" style="-fx-background-color: #800000; -fx-text-inner-color: #DEB887;">
+               <effect>
+                  <InnerShadow height="44.45" radius="15.8625">
+                     <color>
+                        <Color red="0.029999999329447746" green="0.029999999329447746" blue="0.029999999329447746" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+            </TextField>
+            <Label fx:id="diary_label_sport_time" alignment="CENTER" contentDisplay="CENTER" maxHeight="55.0" maxWidth="150.0" minHeight="55.0" minWidth="150.0" prefHeight="55.0" prefWidth="143.0" style="-fx-background-color: #DEB887;" text="Часы спорта" textAlignment="RIGHT">
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+               <effect>
+                  <InnerShadow choke="0.4" height="18.07" radius="9.2675">
+                     <color>
+                        <Color red="0.40789473056793213" green="0.1924281120300293" blue="0.10008528083562851" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Label>
+            <TextField fx:id="diary_textField_sport_time" maxHeight="55.0" maxWidth="70.0" minHeight="55.0" minWidth="40.0" opacity="0.9" prefHeight="55.0" prefWidth="69.0" style="-fx-background-color: #800000; -fx-text-inner-color: #DEB887;">
+               <effect>
+                  <InnerShadow height="44.45" radius="15.8625">
+                     <color>
+                        <Color red="0.029999999329447746" green="0.029999999329447746" blue="0.029999999329447746" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+            </TextField>
+         </children>
+      </FlowPane>
+      <Button fx:id="diary_change_btn" alignment="CENTER" cache="true" cacheHint="SPEED" contentDisplay="CENTER" layoutX="1146.0" layoutY="760.0" maxHeight="38.0" maxWidth="160.0" minHeight="38.0" minWidth="160.0" mnemonicParsing="false" onAction="#update_diary" opacity="0.95" prefHeight="30.0" prefWidth="703.0" style="-fx-background-color: #DEB887;" styleClass="btn" text="Изменить" textAlignment="CENTER" textFill="#171717" textOverrun="CLIP" wrapText="true">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font>
+         <effect>
+            <InnerShadow height="44.45" radius="15.8625" />
+         </effect>
+         <opaqueInsets>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </opaqueInsets>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ImageView fitHeight="145.0" fitWidth="304.0" layoutX="748.0" layoutY="-33.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@style/img/fight_rome.gif" />
+         </image>
+      </ImageView>
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+   <effect>
+      <InnerShadow blurType="ONE_PASS_BOX" choke="0.66" height="30.0" radius="14.5" width="30.0" />
+   </effect>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
+</AnchorPane>
