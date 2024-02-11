@@ -17,7 +17,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -102,7 +105,7 @@ public class NoteController implements Initializable {
 
     public void take_info_from_table(MouseEvent event){
         Note note = table_note.getSelectionModel().getSelectedItem();
-        link_field.setText(note.getNote());
+        link_field.setText(note.getLink());
         note_area.setText(note.getNote());
     }
 

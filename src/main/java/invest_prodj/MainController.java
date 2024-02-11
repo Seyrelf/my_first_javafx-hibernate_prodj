@@ -1,8 +1,10 @@
 package invest_prodj;
 
 import invest_prodj.model.Investment;
+import invest_prodj.model.Note;
 import invest_prodj.service.DiaryService;
 import invest_prodj.service.InvestmentService;
+import invest_prodj.service.NoteService;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -34,6 +36,8 @@ public class MainController implements Initializable {
     private Scene scene;
     private Parent root;
     public InvestmentService investmentService;
+    public NoteService noteService;
+
     public DiaryService diaryService;
     public WebEngine engine;
     public double webZoom;
@@ -95,6 +99,8 @@ public class MainController implements Initializable {
         engine.load("http://google.com");
         webZoom = 1;
         investmentService = new InvestmentService();
+        noteService = new NoteService();
+        diaryService = new DiaryService();
         set_info_to_label();
         Timenow();
     }
@@ -120,9 +126,10 @@ public class MainController implements Initializable {
     }
 
     public void set_info_to_label(){
-        diaryService = new DiaryService();
         sport_week_label.setText("  Спорт за неделю: "+diaryService.sport_for_week_sum().toString());
         study_week_label.setText("  Учеба за неделю: "+diaryService.learn_for_week_sum().toString());
+        Note note = noteService.findNote(8);
+        purpose_label.setText(" " + note.getLink() + " " + note.getNote());
 
         tinkoff_capital_label.setText("  Капитал Тинькофф: " + get_amount_from_tinkoff());
         try {
