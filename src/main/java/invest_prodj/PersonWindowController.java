@@ -29,6 +29,7 @@ public class PersonWindowController implements Initializable {
     private Scene scene;
     private Parent root;
 
+    Dialog<ButtonType> dialog = new Dialog<>();
     public ObservableList<Person> list_for_person;
 
     public PersonService personService;
@@ -103,29 +104,38 @@ public class PersonWindowController implements Initializable {
         person_textfield_note.setText(person.getNote());
     }
 
-    public void create_person(ActionEvent e){
-        Person person = new Person(person_textfield_name.getText(),person_textfield_note.getText(),person_textfield_phone.getText());
-        personService.savePerson(person);
-        //rsonService.updatePerson(person);
-        show_all_person();
+    public void create_person(ActionEvent e) throws IOException {
+        try {
+            Person person = new Person(person_textfield_name.getText(),person_textfield_note.getText(),person_textfield_phone.getText());
+            personService.savePerson(person);
+            show_all_person();}
+        catch (Exception exception){
+            get_dialog_err();}
 
     }
 
-    public void change_person(ActionEvent e){
-        Person person = person_table.getSelectionModel().getSelectedItem();
-        person.setName(person_textfield_name.getText());
-        person.setNote(person_textfield_note.getText());
-        person.setPhone_number(person_textfield_phone.getText());
-        personService.updatePerson(person);
-        show_all_person();
+    public void change_person(ActionEvent e) throws IOException {
+        try {
+            Person person = person_table.getSelectionModel().getSelectedItem();
+            person.setName(person_textfield_name.getText());
+            person.setNote(person_textfield_note.getText());
+            person.setPhone_number(person_textfield_phone.getText());
+            personService.updatePerson(person);
+            show_all_person();}
+        catch (Exception exception){
+            get_dialog_err();}
 
 
     }
 
-    public void delete_person(ActionEvent e){
-        Person person = person_table.getSelectionModel().getSelectedItem();
-        personService.deletePerson(person_table.getSelectionModel().getSelectedItem());
-        show_all_person();
+    public void delete_person(ActionEvent e) throws IOException {
+        try{
+            Person person = person_table.getSelectionModel().getSelectedItem();
+            personService.deletePerson(person_table.getSelectionModel().getSelectedItem());
+            show_all_person();}
+        catch (Exception exception){
+            get_dialog_err();
+    }
 
 
     }
@@ -152,5 +162,14 @@ public class PersonWindowController implements Initializable {
                     System.out.println(e);}
                 Platform.runLater(()->{time_label.setText(sdf.format(new Date()));});}});
         thread.start();
+    }
+
+    public void get_dialog_err() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("dialog_err.fxml"));
+        fxmlLoader.setController(this);
+        DialogPane day_dialog = fxmlLoader.load();
+        dialog.setDialogPane(day_dialog);
+        dialog.show();
     }
 }

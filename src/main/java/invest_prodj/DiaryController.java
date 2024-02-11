@@ -107,30 +107,42 @@ public class DiaryController implements Initializable {
         System.exit(0);
     }
 
-    public void create_diary(ActionEvent e){
-        Diary diary = new Diary(java.sql.Date.valueOf(diary_datepicker.getValue()),diary_textField_note.getText(),
-                diary_textField_sport.getText(),diary_textField_learn.getText(),new Double(diary_textField_sport_time.getText()),
-                new Double(diary_textField_learn_time.getText()));
-        diaryService.saveDiary(diary);
-        show_all_day_from_diary();
+    public void create_diary(ActionEvent e) throws IOException {
+        try {
+            Diary diary = new Diary(java.sql.Date.valueOf(diary_datepicker.getValue()),diary_textField_note.getText(),
+                    diary_textField_sport.getText(),diary_textField_learn.getText(),new Double(diary_textField_sport_time.getText()),
+                    new Double(diary_textField_learn_time.getText()));
+            diaryService.saveDiary(diary);
+            show_all_day_from_diary();}
+        catch (Exception exception){
+            get_dialog_err();
+        }
     }
 
-    public void delete_diary(ActionEvent e){
-        Diary diary = diary_table.getSelectionModel().getSelectedItem();
-        diaryService.deleteDiary(diary);
-        show_all_day_from_diary();
+    public void delete_diary(ActionEvent e) throws IOException {
+        try {
+            Diary diary = diary_table.getSelectionModel().getSelectedItem();
+            diaryService.deleteDiary(diary);
+            show_all_day_from_diary();}
+            catch (Exception exception){
+            get_dialog_err();
+        }
     }
 
-    public void update_diary(ActionEvent e){
-        Diary diary = diary_table.getSelectionModel().getSelectedItem();
-        diary.setDate_create(java.sql.Date.valueOf(diary_datepicker.getValue()));
-        diary.setNote(diary_textField_note.getText());
-        diary.setSport_info(diary_textField_sport.getText());
-        diary.setLearn_info(diary_textField_learn.getText());
-        diary.setSport_time(new Double(diary_textField_sport_time.getText()));
-        diary.setLearn_time(new Double(diary_textField_learn_time.getText()));
-        diaryService.updateDiary(diary);
-        show_all_day_from_diary();
+    public void update_diary(ActionEvent e) throws IOException {
+        try {
+            Diary diary = diary_table.getSelectionModel().getSelectedItem();
+            diary.setDate_create(java.sql.Date.valueOf(diary_datepicker.getValue()));
+            diary.setNote(diary_textField_note.getText());
+            diary.setSport_info(diary_textField_sport.getText());
+            diary.setLearn_info(diary_textField_learn.getText());
+            diary.setSport_time(new Double(diary_textField_sport_time.getText()));
+            diary.setLearn_time(new Double(diary_textField_learn_time.getText()));
+            diaryService.updateDiary(diary);
+            show_all_day_from_diary();}
+        catch (Exception exception){
+            get_dialog_err();
+        }
     }
 
     public void take_day_from_diary_table(MouseEvent event){
@@ -145,19 +157,23 @@ public class DiaryController implements Initializable {
     }
 
     public void show_day(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("day.fxml"));
-        fxmlLoader.setController(this);
-        DialogPane day_dialog = fxmlLoader.load();
-        dialog.setDialogPane(day_dialog);
-        Diary diary = diary_table.getSelectionModel().getSelectedItem();
-        dialog_date_label.setText(" Дата: " + diary.getDate_create().toLocalDate().toString());
-        dialog_note_textarea.setText(diary.getNote());
-        dialog_learn_info_textarea.setText(diary.getLearn_info());
-        dialog_learn_time_label.setText(" Часы учебы: " +String.valueOf(diary.getLearn_time()));
-        dialog_sport_info_textarea.setText(diary.getSport_info());
-        dialog_sport_time_label.setText(" Часы спорта: " +String.valueOf(diary.getSport_time()));
-        dialog.show();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("day.fxml"));
+            fxmlLoader.setController(this);
+            DialogPane day_dialog = fxmlLoader.load();
+            dialog.setDialogPane(day_dialog);
+            Diary diary = diary_table.getSelectionModel().getSelectedItem();
+            dialog_date_label.setText(" Дата: " + diary.getDate_create().toLocalDate().toString());
+            dialog_note_textarea.setText(diary.getNote());
+            dialog_learn_info_textarea.setText(diary.getLearn_info());
+            dialog_learn_time_label.setText(" Часы учебы: " +String.valueOf(diary.getLearn_time()));
+            dialog_sport_info_textarea.setText(diary.getSport_info());
+            dialog_sport_time_label.setText(" Часы спорта: " +String.valueOf(diary.getSport_time()));
+            dialog.show();}
+        catch (Exception exception){
+            get_dialog_err();
+        }
         
     }
     public void show_all_day_from_diary(){
@@ -190,5 +206,14 @@ public class DiaryController implements Initializable {
                     System.out.println(e);}
                 Platform.runLater(()->{time_label.setText(sdf.format(new Date()));});}});
         thread.start();
+    }
+
+    public void get_dialog_err() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("dialog_err.fxml"));
+        fxmlLoader.setController(this);
+        DialogPane day_dialog = fxmlLoader.load();
+        dialog.setDialogPane(day_dialog);
+        dialog.show();
     }
 }

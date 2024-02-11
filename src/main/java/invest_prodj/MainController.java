@@ -158,6 +158,15 @@ public class MainController implements Initializable {
         stage.show();
     }
 
+    public void switch_window_to_note(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(MainController.class.getResource("note.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setTitle("Заметки");
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public void switch_window_to_diary(ActionEvent event) throws IOException {
         root = FXMLLoader.load(MainController.class.getResource("diary.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -166,12 +175,12 @@ public class MainController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    public void load_btn(ActionEvent event){
-        try {
-            loadPage();
+    public void load_btn(ActionEvent event) throws  IOException{
+        if(browser_find_textfield.getText().isEmpty()){
+            System.out.println("Пустрая строка поиска");
         }
-        catch (Exception exception){
-            System.out.println("Пустая строка поиска");
+        else  {
+            engine.load("http://" + browser_find_textfield.getText()+".com");
         }
     }
 

@@ -8,12 +8,10 @@
     -fx-background-size: cover;
 }
 
-.dialog_err{
-    -fx-background-image:url("img/main.png");
-    -fx-height: 100%;
+.text-area {
+    text-area-background:   #FFDEAD ;
+}
 
-    /* Center and scale the image nicely */
-    -fx-background-position: center;
-    -fx-background-repeat: no-repeat;
-    -fx-background-size: cover;
+.text-area .content {
+    -fx-background-color: text-area-background ;
 }

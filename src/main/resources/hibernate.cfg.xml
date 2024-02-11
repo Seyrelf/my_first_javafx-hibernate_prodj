@@ -12,6 +12,8 @@
         <property name="show_sql">true</property>
         <mapping class="invest_prodj.model.Person"/>
         <mapping class="invest_prodj.model.Investment"/>
+        <mapping class="invest_prodj.model.Note"/>
+        <mapping class="invest_prodj.model.Diary"/>
 
     </session-factory>
 </hibernate-configuration>

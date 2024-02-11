@@ -32,6 +32,8 @@ public class InvestmentWindowController implements Initializable {
     private Scene scene;
     private Parent root;
 
+    Dialog<ButtonType> dialog = new Dialog<>();
+
     public ObservableList<Investment> list_for_investment;
 
     public InvestmentService investmentService;
@@ -101,7 +103,7 @@ public class InvestmentWindowController implements Initializable {
         Timenow();   }
 
     public void change_window_to_person(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(PersonWindowController.class.getResource("person_window.fxml"));
+        root = FXMLLoader.load(PersonWindowController.class.getResource("person_window.fxml"));
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setTitle("Редактор обьектов");
@@ -110,7 +112,7 @@ public class InvestmentWindowController implements Initializable {
     }
 
     public void change_window_to_main(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(MainController.class.getResource("investment_main_window.fxml"));
+        root = FXMLLoader.load(MainController.class.getResource("investment_main_window.fxml"));
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setTitle("Меню управления капиталом");
@@ -118,29 +120,41 @@ public class InvestmentWindowController implements Initializable {
         stage.show();
     }
 
-    public void create_investment(ActionEvent e){
-        Investment investment = new Investment(investment_textfield_name.getText(),investment_textfield_note.getText(),
-                new BigDecimal(investment_textfield_amount.getText()),new Double(investment_textfield_percent.getText()),
-                investment_combobox_name.getValue().getId(),java.sql.Date.valueOf((investment_datepicker_name.getValue())));
-        investmentService.saveInvestment(investment);
-        show_all_investment();
+    public void create_investment(ActionEvent e) throws IOException {
+        try {
+            Investment investment = new Investment(investment_textfield_name.getText(),investment_textfield_note.getText(),
+                    new BigDecimal(investment_textfield_amount.getText()),new Double(investment_textfield_percent.getText()),
+                    investment_combobox_name.getValue().getId(),java.sql.Date.valueOf((investment_datepicker_name.getValue())));
+            investmentService.saveInvestment(investment);
+            show_all_investment();}
+        catch (Exception exception){
+            get_dialog_err();
+        }
     }
 
-    public void delete_investment(ActionEvent e){
-        Investment investment = investment_table.getSelectionModel().getSelectedItem();
-        investmentService.deleteInvestment(investment);
-        show_all_investment();
+    public void delete_investment(ActionEvent e) throws IOException {
+        try {
+            Investment investment = investment_table.getSelectionModel().getSelectedItem();
+            investmentService.deleteInvestment(investment);
+            show_all_investment();}
+        catch (Exception exception){
+            get_dialog_err();
+        }
     }
 
-    public void change_investment(ActionEvent e){
-        Investment investment = investment_table.getSelectionModel().getSelectedItem();
-        investment.setName(investment_textfield_name.getText());
-        investment.setAmount(new BigDecimal(investment_textfield_amount.getText()));
-        investment.setNote(investment_textfield_note.getText());
-        investment.setPercent(Double.valueOf(investment_textfield_percent.getText()));
-        investment.setData(java.sql.Date.valueOf(investment_datepicker_name.getValue()));
-        investmentService.updateInvestment(investment);
-        show_all_investment();
+    public void change_investment(ActionEvent e) throws IOException {
+        try {
+            Investment investment = investment_table.getSelectionModel().getSelectedItem();
+            investment.setName(investment_textfield_name.getText());
+            investment.setAmount(new BigDecimal(investment_textfield_amount.getText()));
+            investment.setNote(investment_textfield_note.getText());
+            investment.setPercent(Double.valueOf(investment_textfield_percent.getText()));
+            investment.setData(java.sql.Date.valueOf(investment_datepicker_name.getValue()));
+            investmentService.updateInvestment(investment);
+            show_all_investment();}
+        catch (Exception exception){
+            get_dialog_err();
+        }
     }
 
     public void close_program(ActionEvent e){
@@ -194,6 +208,15 @@ public class InvestmentWindowController implements Initializable {
                     System.out.println(e);}
                 Platform.runLater(()->{time_label.setText(sdf.format(new Date()));});}});
         thread.start();
+    }
+
+    public void get_dialog_err() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("dialog_err.fxml"));
+        fxmlLoader.setController(this);
+        DialogPane day_dialog = fxmlLoader.load();
+        dialog.setDialogPane(day_dialog);
+        dialog.show();
     }
 }
 

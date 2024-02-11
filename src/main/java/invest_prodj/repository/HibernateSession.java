@@ -2,6 +2,7 @@ package invest_prodj.repository;
 
 import invest_prodj.model.Diary;
 import invest_prodj.model.Investment;
+import invest_prodj.model.Note;
 import invest_prodj.model.Person;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -19,6 +20,7 @@ public class HibernateSession {
                 configuration.addAnnotatedClass(Person.class);
                 configuration.addAnnotatedClass(Investment.class);
                 configuration.addAnnotatedClass(Diary.class);
+                configuration.addAnnotatedClass(Note.class);
                 StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
                 sessionFactory = configuration.buildSessionFactory(builder.build());
             }
